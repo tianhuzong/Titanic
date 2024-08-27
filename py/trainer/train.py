@@ -3,7 +3,7 @@ import loguru
 import tqdm
 import numpy as np
 
-def train(model, max_epoch, lossfn, opt, train_loader, test_loader):
+def train(model, max_epoch, lossfn, train_loader, test_loader):
     
     lr_scheduler = paddle.optimizer.lr.ReduceOnPlateau(0.0005, factor=0.85, patience=100, verbose = True)
     opt = paddle.optimizer.Adam(learning_rate=lr_scheduler, parameters=model.parameters())

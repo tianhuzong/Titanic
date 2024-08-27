@@ -3,3 +3,4 @@ numpy
 paddlepaddle
 loguru
 tqdm
+click

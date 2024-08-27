@@ -1,5 +1,5 @@
-import paddle
-import model as model_module
+import importlib
+
 
 def build_tensor(
     sex : int, # 男1 女0
@@ -42,17 +42,21 @@ def build_tensor(
     temp[1] = 1 if 2<= family_size <= 4 else 0
     temp[2] = 1 if family_size > 4 else 0
     target_list.extend(temp)
-    return paddle.to_tensor(target_list, dtype=paddle.float32)
+    return target_list
 
 
-def load_model(path):
-    state_dict = paddle.load(path)
-    net = model_module.Model()
-    net.set_state_dict(state_dict)
-    net.eval()
-    return net
 
-
-def predict(net, target):
-    output = net(target)
-    return (output.argmax() == paddle.to_tensor(1,dtype=paddle.int64)).item()
+def predict(inference, model_path,target):
+    """
+    预测函数
+    :param inference: 推理框架 onnx or paddle
+    :param model_path: 模型路径 如果是onnx 则为onnx模型文件路径 如果是paddle 则为paddle模型名(不包含后缀,且确保模型参数和模型结构在同一目录下)
+    :param target: 输入数据 格式为列表 长度为28
+    :return: 预测结果 True 代表 生还 False 代表  死亡
+    """
+    if inference == "onnx":
+        from . import predict_onnx as pre 
+    elif inference == "paddle":
+        from .import predict_paddle as pre
+    output = pre.predict(model_path,target)
+    return output
