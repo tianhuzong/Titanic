@@ -15,7 +15,6 @@ def main():
     train_loader, test_loader, val_loader = datasets.get_dataloader(train, test, val)
     
     net = model.Model()
-    net.set_state_dict(paddle.load("checkpoints/model_10.pdparams"))
     opt = paddle.optimizer.SGD(learning_rate=0.005, parameters=net.parameters())
     lossfn = paddle.nn.functional.cross_entropy
     

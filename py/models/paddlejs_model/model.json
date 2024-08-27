@@ -1,0 +1,505 @@
+{
+    "chunkNum": 1, 
+    "dataLayout": "nchw", 
+    "feedShape": {
+        "fh": 1, 
+        "fw": 28
+    }, 
+    "ops": [
+        {
+            "attrs": {
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "X": [
+                    "feed"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "image"
+                ]
+            }, 
+            "type": "feed"
+        }, 
+        {
+            "attrs": {
+                "in_dtype": 5, 
+                "out_dtype": 5
+            }, 
+            "inputs": {
+                "X": [
+                    "image"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "tmp_0"
+                ]
+            }, 
+            "type": "cast"
+        }, 
+        {
+            "attrs": {
+                "trans_x": false, 
+                "trans_y": false
+            }, 
+            "inputs": {
+                "X": [
+                    "tmp_0"
+                ], 
+                "Y": [
+                    "linear_0.w_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "linear_0.tmp_0"
+                ]
+            }, 
+            "type": "matmul_v2"
+        }, 
+        {
+            "attrs": {
+                "axis": -1
+            }, 
+            "inputs": {
+                "X": [
+                    "linear_0.tmp_0"
+                ], 
+                "Y": [
+                    "linear_0.b_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "linear_0.tmp_1"
+                ]
+            }, 
+            "type": "elementwise_add"
+        }, 
+        {
+            "attrs": {}, 
+            "inputs": {
+                "X": [
+                    "linear_0.tmp_1"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "relu_0.tmp_0"
+                ]
+            }, 
+            "type": "relu"
+        }, 
+        {
+            "attrs": {
+                "dropout_implementation": "upscale_in_train", 
+                "dropout_prob": 0.30000001192092896
+            }, 
+            "inputs": {
+                "X": [
+                    "relu_0.tmp_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "dropout_0.tmp_0"
+                ]
+            }, 
+            "type": "dropout"
+        }, 
+        {
+            "attrs": {
+                "trans_x": false, 
+                "trans_y": false
+            }, 
+            "inputs": {
+                "X": [
+                    "dropout_0.tmp_0"
+                ], 
+                "Y": [
+                    "linear_1.w_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "linear_1.tmp_0"
+                ]
+            }, 
+            "type": "matmul_v2"
+        }, 
+        {
+            "attrs": {
+                "axis": -1
+            }, 
+            "inputs": {
+                "X": [
+                    "linear_1.tmp_0"
+                ], 
+                "Y": [
+                    "linear_1.b_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "linear_1.tmp_1"
+                ]
+            }, 
+            "type": "elementwise_add"
+        }, 
+        {
+            "attrs": {}, 
+            "inputs": {
+                "X": [
+                    "linear_1.tmp_1"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "relu_1.tmp_0"
+                ]
+            }, 
+            "type": "relu"
+        }, 
+        {
+            "attrs": {
+                "trans_x": false, 
+                "trans_y": false
+            }, 
+            "inputs": {
+                "X": [
+                    "relu_1.tmp_0"
+                ], 
+                "Y": [
+                    "linear_2.w_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "linear_2.tmp_0"
+                ]
+            }, 
+            "type": "matmul_v2"
+        }, 
+        {
+            "attrs": {
+                "axis": -1
+            }, 
+            "inputs": {
+                "X": [
+                    "linear_2.tmp_0"
+                ], 
+                "Y": [
+                    "linear_2.b_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "linear_2.tmp_1"
+                ]
+            }, 
+            "type": "elementwise_add"
+        }, 
+        {
+            "attrs": {}, 
+            "inputs": {
+                "X": [
+                    "linear_2.tmp_1"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "relu_2.tmp_0"
+                ]
+            }, 
+            "type": "relu"
+        }, 
+        {
+            "attrs": {
+                "trans_x": false, 
+                "trans_y": false
+            }, 
+            "inputs": {
+                "X": [
+                    "relu_2.tmp_0"
+                ], 
+                "Y": [
+                    "linear_3.w_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "linear_3.tmp_0"
+                ]
+            }, 
+            "type": "matmul_v2"
+        }, 
+        {
+            "attrs": {
+                "axis": -1
+            }, 
+            "inputs": {
+                "X": [
+                    "linear_3.tmp_0"
+                ], 
+                "Y": [
+                    "linear_3.b_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "linear_3.tmp_1"
+                ]
+            }, 
+            "type": "elementwise_add"
+        }, 
+        {
+            "attrs": {
+                "axis": -1
+            }, 
+            "inputs": {
+                "X": [
+                    "linear_3.tmp_1"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "softmax_0.tmp_0"
+                ]
+            }, 
+            "type": "softmax"
+        }, 
+        {
+            "attrs": {
+                "bias": 0.0, 
+                "bias_after_scale": true, 
+                "scale": 1.0
+            }, 
+            "inputs": {
+                "X": [
+                    "softmax_0.tmp_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "save_infer_model/scale_0.tmp_0"
+                ]
+            }, 
+            "type": "scale"
+        }, 
+        {
+            "attrs": {
+                "with_quant_attr": false
+            }, 
+            "inputs": {
+                "X": [
+                    "save_infer_model/scale_0.tmp_0"
+                ]
+            }, 
+            "outputs": {
+                "Out": [
+                    "fetch"
+                ]
+            }, 
+            "type": "fetch"
+        }
+    ], 
+    "vars": {
+        "dropout_0.tmp_0": {
+            "name": "dropout_0.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                1, 
+                120
+            ]
+        }, 
+        "dropout_0.tmp_1": {
+            "name": "dropout_0.tmp_1", 
+            "persistable": false, 
+            "shape": [
+                0
+            ]
+        }, 
+        "linear_0.b_0": {
+            "name": "linear_0.b_0", 
+            "persistable": true, 
+            "shape": [
+                120
+            ]
+        }, 
+        "linear_0.tmp_0": {
+            "name": "linear_0.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                1, 
+                120
+            ]
+        }, 
+        "linear_0.tmp_1": {
+            "name": "linear_0.tmp_1", 
+            "persistable": false, 
+            "shape": [
+                1, 
+                120
+            ]
+        }, 
+        "linear_0.w_0": {
+            "name": "linear_0.w_0", 
+            "persistable": true, 
+            "shape": [
+                28, 
+                120
+            ]
+        }, 
+        "linear_1.b_0": {
+            "name": "linear_1.b_0", 
+            "persistable": true, 
+            "shape": [
+                300
+            ]
+        }, 
+        "linear_1.tmp_0": {
+            "name": "linear_1.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                1, 
+                300
+            ]
+        }, 
+        "linear_1.tmp_1": {
+            "name": "linear_1.tmp_1", 
+            "persistable": false, 
+            "shape": [
+                1, 
+                300
+            ]
+        }, 
+        "linear_1.w_0": {
+            "name": "linear_1.w_0", 
+            "persistable": true, 
+            "shape": [
+                120, 
+                300
+            ]
+        }, 
+        "linear_2.b_0": {
+            "name": "linear_2.b_0", 
+            "persistable": true, 
+            "shape": [
+                84
+            ]
+        }, 
+        "linear_2.tmp_0": {
+            "name": "linear_2.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                1, 
+                84
+            ]
+        }, 
+        "linear_2.tmp_1": {
+            "name": "linear_2.tmp_1", 
+            "persistable": false, 
+            "shape": [
+                1, 
+                84
+            ]
+        }, 
+        "linear_2.w_0": {
+            "name": "linear_2.w_0", 
+            "persistable": true, 
+            "shape": [
+                300, 
+                84
+            ]
+        }, 
+        "linear_3.b_0": {
+            "name": "linear_3.b_0", 
+            "persistable": true, 
+            "shape": [
+                2
+            ]
+        }, 
+        "linear_3.tmp_0": {
+            "name": "linear_3.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                1, 
+                2
+            ]
+        }, 
+        "linear_3.tmp_1": {
+            "name": "linear_3.tmp_1", 
+            "persistable": false, 
+            "shape": [
+                1, 
+                2
+            ]
+        }, 
+        "linear_3.w_0": {
+            "name": "linear_3.w_0", 
+            "persistable": true, 
+            "shape": [
+                84, 
+                2
+            ]
+        }, 
+        "relu_0.tmp_0": {
+            "name": "relu_0.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                1, 
+                120
+            ]
+        }, 
+        "relu_1.tmp_0": {
+            "name": "relu_1.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                1, 
+                300
+            ]
+        }, 
+        "relu_2.tmp_0": {
+            "name": "relu_2.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                1, 
+                84
+            ]
+        }, 
+        "save_infer_model/scale_0.tmp_0": {
+            "name": "save_infer_model/scale_0.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                1, 
+                2
+            ]
+        }, 
+        "softmax_0.tmp_0": {
+            "name": "softmax_0.tmp_0", 
+            "persistable": false, 
+            "shape": [
+                1, 
+                2
+            ]
+        }, 
+        "tmp_0": {
+            "name": "tmp_0", 
+            "persistable": false, 
+            "shape": [
+                1, 
+                28
+            ]
+        }, 
+        "x": {
+            "name": "x", 
+            "persistable": false, 
+            "shape": [
+                1, 
+                28
+            ]
+        }
+    }
+}
