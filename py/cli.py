@@ -1,5 +1,7 @@
 import click
 import typing
+import os
+import subprocess
 from trainer import predict as predict_module
 
 @click.group()
@@ -16,9 +18,16 @@ input_arg_types = (int, float, int, int, int, int, int, int, int, int, int, int,
 @click.argument('input_args',  type=input_arg_types, nargs=28)
 def predict(framework, model_path, input_args):
     """Predict the survival of a passenger based on their input data"""
-    res = predict_module.predict(framework, model_path, input_args)
+    model = predict_module.load_model(model_path)
+    res = predict_module.predict(framework, model, input_args)
     click.echo("The passenger {} survive.".format("can" if res else "cannot"))
 
+@cli.command()
+def runapp(framework, model_path):
+    os.environ["titanic_fastapi_app_framework"] = framework
+    os.environ["titanic_fastapi_app_model_path"] = model_path
+    subprocess.run(["uvicorn","app:app","--reload"])
+    pass
 
 if __name__ == '__main__':
     cli()

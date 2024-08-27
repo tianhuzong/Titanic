@@ -44,9 +44,14 @@ def build_tensor(
     target_list.extend(temp)
     return target_list
 
+def load_model(model_path):
+    if inference == "onnx":
+        from . import predict_onnx as pre 
+    elif inference == "paddle":
+        from .import predict_paddle as pre
+    return pre.load_model(model_path)   
 
-
-def predict(inference, model_path,target):
+def predict(inference, model, target):
     """
     预测函数
     :param inference: 推理框架 onnx or paddle
