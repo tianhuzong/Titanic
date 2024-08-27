@@ -1,6 +1,7 @@
 panda
 numpy
 paddlepaddle
+onnxruntime
 loguru
 tqdm
 click
