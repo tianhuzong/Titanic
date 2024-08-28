@@ -44,24 +44,24 @@ def build_tensor(
     target_list.extend(temp)
     return target_list
 
-def load_model(model_path):
-    if inference == "onnx":
+def load_model(framework, model_path):
+    if framework == "onnx":
         from . import predict_onnx as pre 
-    elif inference == "paddle":
+    elif framework == "paddle":
         from .import predict_paddle as pre
     return pre.load_model(model_path)   
 
-def predict(inference, model, target):
+def predict(framework, model, target):
     """
     预测函数
-    :param inference: 推理框架 onnx or paddle
+    :param framework: 推理框架 onnx or paddle
     :param model_path: 模型路径 如果是onnx 则为onnx模型文件路径 如果是paddle 则为paddle模型名(不包含后缀,且确保模型参数和模型结构在同一目录下)
     :param target: 输入数据 格式为列表 长度为28
     :return: 预测结果 True 代表 生还 False 代表  死亡
     """
-    if inference == "onnx":
+    if framework == "onnx":
         from . import predict_onnx as pre 
-    elif inference == "paddle":
+    elif framework == "paddle":
         from .import predict_paddle as pre
-    output = pre.predict(model_path,target)
-    return output
+    output = pre.predict(model,target)
+    return bool(output)

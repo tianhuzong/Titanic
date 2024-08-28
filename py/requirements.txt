@@ -5,5 +5,4 @@ onnxruntime
 loguru
 tqdm
 click
-fastapi
-uvicorn[standard]
+flask

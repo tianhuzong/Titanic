@@ -2,6 +2,7 @@ import click
 import typing
 import os
 import subprocess
+import app
 from trainer import predict as predict_module
 
 @click.group()
@@ -23,11 +24,14 @@ def predict(framework, model_path, input_args):
     click.echo("The passenger {} survive.".format("can" if res else "cannot"))
 
 @cli.command()
-def runapp(framework, model_path):
-    os.environ["titanic_fastapi_app_framework"] = framework
-    os.environ["titanic_fastapi_app_model_path"] = model_path
-    subprocess.run(["uvicorn","app:app","--reload"])
-    pass
+@click.option('-f','--framework', prompt='Please enter the framework',type=click.Choice(['paddle', 'onnx']) ,help='The framework to use for prediction (paddle or onnx)',required=True)
+@click.option('-m','--model_path', prompt='Please enter the model path',help='The path to the model file, If it is a model of flying slurry frame, please enter the file name, for example, models/paddle_model/model_titan (if your model is model_titan.pamodel).',required=True)
+@click.option('--host', default="0.0.0.0", help='The host to run the app on',required=True)
+@click.option('--port', default=8000, help='The port to run the app on',required=True)
+@click.option('--debug', default=False, help='Whether to run the app in debug mode',required=True, is_flag=True)
+def runapp(framework, model_path, host, port, debug):
+    app.run_app(framework, model_path, host=host, port=port, debug=debug)
+    
 
 if __name__ == '__main__':
     cli()
