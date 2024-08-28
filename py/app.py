@@ -1,10 +1,11 @@
 import os
 import json
 from flask import Flask, request
+from flask_cors import CORS
 from trainer import predict as predict_module
 
 app = Flask(__name__)
-
+CORS(app) 
 global model
 global frame
 

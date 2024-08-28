@@ -42,7 +42,7 @@ def build_tensor(
     temp[1] = 1 if 2<= family_size <= 4 else 0
     temp[2] = 1 if family_size > 4 else 0
     target_list.extend(temp)
-    return target_list
+    return [target_list]
 
 def load_model(framework, model_path):
     if framework == "onnx":

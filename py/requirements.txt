@@ -6,3 +6,4 @@ loguru
 tqdm
 click
 flask
+flask-cors
