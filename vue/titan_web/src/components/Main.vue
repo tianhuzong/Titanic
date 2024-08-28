@@ -239,14 +239,18 @@ $(document).ready(function (){
 
 const on_submit = () => {
     console.log("input_value:",sex.value, age.value, fare.value, embarked.value, ticket_class.value, name_title.value, cabin.value, family_size.value);
-    const output_data = titanUtil.predict(sex.value, age.value, fare.value, embarked.value, ticket_class.value, name_title.value, cabin.value, family_size.value);
+    //var output_data = undefined;
+    var output_data = titanUtil.predict(sex.value, age.value, fare.value, embarked.value, ticket_class.value, name_title.value, cabin.value, family_size.value);
+    //output_data = output_data !== undefined ?  output_data.resul : titanUtil.predict(sex.value, age.value, fare.value, embarked.value, ticket_class.value, name_title.value, cabin.value, family_size.value);
     ElMessageBox.alert(output_data.result ? "可以存活" : "无法存活", '预测结果', {
     // if you want to disable its autofocus
     // autofocus: false,
     confirmButtonText: 'OK',
   });
-  var {canvas, play} = useVideoPlayer();
-  console.log("canvas.value:",canvas.value);
+  setTimeout(() => {
+    console.log("等待1s给他请求")
+  }, 1000);
+  console.log("canvas.value:",window.canvas.value);
   play();
 }
 

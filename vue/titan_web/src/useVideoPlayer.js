@@ -10,13 +10,16 @@ export function useVideoPlayer() {
   let isPlaying = false;
 
   const play = () => {
-    
+    canvas.value = document.getElementsByTagName("canvas")[0];
+    ctx = canvas.value.getContext("2d");
+    debugger;
     if (!isPlaying && ctx) {
       console.log("play",ctx);
       console.log(canvas.value);
       videoEl.play();
       isPlaying = true;
       videoRender();
+      debugger;
     }
   };
 

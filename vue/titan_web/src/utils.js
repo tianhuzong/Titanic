@@ -10,6 +10,7 @@ function fetchData(url, input_data) {
             data:JSON.stringify(input_data),
             dataType:"json",
             contentType: "application/json",
+            async:false,
             success:function(response){
                 fetchDatares = response;
                 console.log(response);

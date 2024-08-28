@@ -1,6 +1,6 @@
 <template>
   <div>
-    <canvas ref="canvas" width="640" height="360"></canvas>
+    <canvas ref="canvas" width="640" height="360" id='videoPlayerer'></canvas>
     <el-button @click='play'>play</el-button>
   </div>
 </template>
