@@ -3,7 +3,8 @@ import json
 from flask import Flask, request
 from flask_cors import CORS
 from trainer import predict as predict_module
-
+from loguru import logger
+import time
 app = Flask(__name__)
 CORS(app) 
 global model
@@ -41,7 +42,12 @@ def read_predict():
     family_size = int(data_dict.get("family_size"))
 
     input_data = predict_module.build_tensor(sex, age, fare, embarked, ticket_class, name, cabin, family_size)
-    return {"result":(predict_module.predict(frame, model, input_data))}
+    res = (predict_module.predict(frame, model, input_data))
+    timei = time.time()
+    #转成日期格式xxxx-xx-xx HH:MM:SS
+    timei = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(timei))
+    logger.info(f"{timei}  {res}")
+    return {"result":res}
     
 def run_app(framework, model_path, host="0.0.0.0", port=8000, debug=True):
     global model, frame
