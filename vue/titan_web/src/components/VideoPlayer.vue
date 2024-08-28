@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <canvas ref="canvas" width="640" height="360" id='videoPlayerer'></canvas>
-    <el-button @click='play'>play</el-button>
-  </div>
+    <div>
+        <canvas ref="canvas" width="640" height="360" id='canvas_player'></canvas>
+    </div>
 </template>
 
 <script setup>
@@ -14,6 +13,7 @@ const {canvas, play} = useVideoPlayer();
 
 <style scoped>
 canvas {
-  border: 1px solid #000;
+    border: 1px solid #fffff;
+
 }
 </style>

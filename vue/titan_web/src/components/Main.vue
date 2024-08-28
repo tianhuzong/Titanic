@@ -1,5 +1,5 @@
 <template>
-    <el-form :inline="true" :model="form" label-width="auto" style="max-width: 1500px">
+    <el-form :inline="true" :model="form" label-width="auto" style="max-width: 1200px">
         <el-form-item label="Age(年龄):">
             <el-input-number v-model="age" :min=0  placeholder="Please input" style="width: 240px" />
         </el-form-item>
@@ -85,16 +85,16 @@
             </el-select>
         </el-form-item>
         <el-form-item>
-            <el-button @click="on_submit">提交</el-button>
+            <el-button @click="on_submit" id="submit_button" :disabled="submit_button_disable">提交</el-button>
         </el-form-item>
     </el-form>
-    <VideoPlayer />
+    
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import * as titanUtil from "../utils";
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import VideoPlayer from "./VideoPlayer.vue";
 import {useVideoPlayer} from "../useVideoPlayer.js"
 
@@ -226,7 +226,7 @@ const ticket_class = ref(1);
 const name_title = ref("Officer");
 const cabin = ref("A");
 const family_size = ref(11);
-
+const submit_button_disable = ref(false);
 
 
 var {canvas, play} = useVideoPlayer();
@@ -238,20 +238,26 @@ $(document).ready(function (){
 });
 
 const on_submit = () => {
+    submit_button_disable.value = true;
     console.log("input_value:",sex.value, age.value, fare.value, embarked.value, ticket_class.value, name_title.value, cabin.value, family_size.value);
     var output_data = undefined;
     output_data = titanUtil.predict(sex.value, age.value, fare.value, embarked.value, ticket_class.value, name_title.value, cabin.value, family_size.value);
     //output_data = output_data !== undefined ?  output_data.resul : titanUtil.predict(sex.value, age.value, fare.value, embarked.value, ticket_class.value, name_title.value, cabin.value, family_size.value);
-    ElMessageBox.alert(output_data.result ? "可以存活" : "无法存活", '预测结果', {
-    // if you want to disable its autofocus
-    // autofocus: false,
-    confirmButtonText: 'OK',
-  });
-  setTimeout(() => {
-    console.log("等待1s给他请求")
-  }, 1000);
-  console.log("canvas.value:",window.canvas.value);
-  play();
+    ElMessage("已发起请求,请等待");
+    setTimeout(() => {
+        console.log("等待1s给他请求")
+        /*
+        ElMessageBox.alert(output_data.result ? "可以存活" : "无法存活", '预测结果', {
+            // if you want to disable its autofocus
+            // autofocus: false,
+            confirmButtonText: 'OK',
+        });
+        */
+        console.log("canvas.value:",window.canvas.value);
+        play(() => {
+            submit_button_disable.value = false;
+        });
+    }, 1000);
 }
 
 </script>
