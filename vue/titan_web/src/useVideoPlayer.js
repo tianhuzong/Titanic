@@ -1,5 +1,6 @@
 // useVideoPlayer.js
 import { ref, onMounted } from 'vue';
+import {ElMessageBox} from "element-plus";
 export function useVideoPlayer() {
 
     window.canvas = ref(null);

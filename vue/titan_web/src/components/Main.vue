@@ -240,10 +240,10 @@ $(document).ready(function (){
 const on_submit = () => {
     submit_button_disable.value = true;
     console.log("input_value:",sex.value, age.value, fare.value, embarked.value, ticket_class.value, name_title.value, cabin.value, family_size.value);
-    var output_data = undefined;
+    var output_data = null;
     output_data = titanUtil.predict(sex.value, age.value, fare.value, embarked.value, ticket_class.value, name_title.value, cabin.value, family_size.value);
     //output_data = output_data !== undefined ?  output_data.resul : titanUtil.predict(sex.value, age.value, fare.value, embarked.value, ticket_class.value, name_title.value, cabin.value, family_size.value);
-    ElMessage("已发起请求,请等待");
+    
     setTimeout(() => {
         console.log("等待1s给他请求")
         /*
@@ -254,9 +254,16 @@ const on_submit = () => {
         });
         */
         console.log("canvas.value:",window.canvas.value);
-        play(() => {
+        try{
+            play(() => {
+                submit_button_disable.value = false;
+            }, output_data.result ? "/alive.mp4" : "/dead.mp4");
+        }catch(e){
             submit_button_disable.value = false;
-        });
+            if (output_data !== null){
+                ElMessage({message:"发生错误,错误信息"+e, type:"error" });
+            }
+        }
     }, 1000);
 }
 

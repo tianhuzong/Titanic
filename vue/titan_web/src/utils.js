@@ -1,3 +1,4 @@
+import {ElMessage} from "element-plus";
 var fetchDatares;
 function fetchData(url, input_data) {
     // 解析 JSON 字符串
@@ -31,7 +32,7 @@ export  function predict(
     cabin, // 船舱号 A-T and U
     familySize // 家庭人数 包含自己
 ){
-    const data = {
+    var data = {
         sex: sex,
         age: age,
         fare: fare,
@@ -42,9 +43,14 @@ export  function predict(
         family_size: familySize
     };
     const url = "https://ojvfxv-nkecab-8000.preview.cloudstudio.work/predict";
-    const json_data = JSON.stringify(data);
-    const value =  fetchData(url, data);
+    var value = null;
+    ElMessage("已发起请求,请等待");
+    value =  fetchData(url, data);
     console.log(value);
+    if (value == null){
+        ElMessage({message : "请求失败,请前往服务端查看", type: "error"});
+        return null;
+    }
     return value;
 }
   
