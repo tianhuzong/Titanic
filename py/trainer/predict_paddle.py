@@ -2,7 +2,6 @@ import paddle
 from loguru import logger
 def build_paddle_input(data):
     tensor = paddle.to_tensor(data)
-    logger.debug(tensor)
     return tensor
 
 def load_model(model_path):

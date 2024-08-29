@@ -11,8 +11,14 @@ export function useVideoPlayer() {
 
     const play = (callback = null, videosrc = "/sence1.mp4") => {
         if (callback === null) {
-            callback = () => {
-            console.log("视频播放结束");
+                callback = () => {
+                console.log("视频播放结束");
+                var targetElement = document.getElementById('header_id');
+
+                // 使用scrollIntoView方法平滑滚动到目标元素
+                if (targetElement) {
+                    targetElement.scrollIntoView();
+                }
             };
         }
         
@@ -22,6 +28,12 @@ export function useVideoPlayer() {
             ctx = null;
 
         });
+        var targetElement = document.getElementById('canvas_player');
+
+        // 使用scrollIntoView方法平滑滚动到目标元素
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
         videoEl.src = videosrc;
         videoEl.load();
         videoEl.currentTime = 0;
