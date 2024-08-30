@@ -30,6 +30,7 @@ def predict(framework, model_path, input_args):
 @click.option('--port', default=8000, help='The port to run the app on',required=True)
 @click.option('--debug', default=False, help='Whether to run the app in debug mode',required=True, is_flag=True)
 def runapp(framework, model_path, host, port, debug):
+    """Run the flask app"""
     app.run_app(framework, model_path, host=host, port=port, debug=debug)
     
 
