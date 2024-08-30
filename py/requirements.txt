@@ -1,6 +1,6 @@
 panda
 numpy
-paddlepaddle
+paddlepaddle==2.6.0
 onnxruntime
 loguru
 tqdm
