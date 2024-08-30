@@ -34,3 +34,68 @@ Options:
 所以运行`python app.py`等价于`python app.py -f paddle -m models/paddle_model/model_titan --host 0.0.0.0 --port 8000`
 
 ## 后台运行
+我们的终端不可能一直挂着,所以我们就需要后台运行.
+后台运行的实现在Linux系统上特别简单.
+
+### nohup
+这个命令在linux和Mac OS上适用.
+命令格式为`nohup command &`.终端关闭后进程任然会继续运行.
+```bash
+# 来到Titanic/py目录下,运行命令
+nohup python app.py & > log.txt # python app.py的输出会定向到log.txt
+```
+想要关闭就只能杀进程,不知道怎么杀进程就STFW.
+
+### systemctl
+这是一个linux的命令行工具,通过使用systemd系统来守护进程.(这种说法可能不太准确)
+在一些比较旧的系统中(例如Ubuntu 18)中是使用service命令.
+使用这个命令就需要编写一个配置文件,这些配置文件通常位于 `/etc/systemd/system/` 或 `/lib/systemd/system/` 目录中。
+以下是一个来自chatGPT和网络的示例(titanic_flask_app.service):
+```ini
+[Unit]
+Description=Titanic Flask App
+After=network.target
+
+[Service]
+ExecStart=python /path/to/Titanic/py/app.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+以下是对这个配置文件的解释(来自:[博客园](https://www.cnblogs.com/zrl66/p/17988380)):
+```
+　　[Unit]
+
+　　Description：对该服务的描述；
+　　Documention：说明文档；
+　　Before：在a.service服务启动前，启动本服务；
+　　After：在b.target服务组启动后，再启动本服务；
+　　Wants：弱依赖于c.service，即使被依赖服务启动失败或停止，本服务仍然运行；
+　　Requires：强依赖于d.service，如果被依赖服务启动失败或停止，本服务也会停止。
+　　
+
+　　[Service]
+
+　　EnvironmentFile：服务的参数文件，形成$OPTIONS；
+　　ExecStart: 服务启动命令
+　　ExecReload: 服务重启命令
+　　ExecStop: 服务停止命令
+　　Type：服务启动类型。默认simple表示ExecStart为主进程，notify类似于simple，启动结束后会发出通知信号。另外还有forking,oneshot,dbus,idle等类型；
+　　KillMode：服务停止类型，默认control-group停止时杀死所有子进程，process只杀主进程，none只停止服务，不杀进程；
+　　Restart：服务重启类型，默认no不重启，on-success正常退出时重启，on-failure非正常退出时重启，还有always,on-abnormal,on-abort等；
+　　RestartSec：间隔多久重启服务。
+
+　　[Install]
+
+　　WantedBy：服务所在的服务组。
+```
+
+写完之后将这个文件保存在 `/etc/systemd/system/` 或 `/lib/systemd/system/` 目录中.
+终端运行
+```bash
+sudo systemctl systemctl daemon-reload
+sudo systemctl start titanic_flask_app.service # 你保存时的文件名
+# 停止服务：sudo systemctl stop titanic_flask_app.service
+# 检查状态: sudo systemctl status titanic_flask_app.service
+```
