@@ -99,3 +99,19 @@ sudo systemctl start titanic_flask_app.service # 你保存时的文件名
 # 停止服务：sudo systemctl stop titanic_flask_app.service
 # 检查状态: sudo systemctl status titanic_flask_app.service
 ```
+
+### Windows上的后台运行
+在Windows上可以使用start命令(PowerShell的Start-Process),其余的方法请自行上网.
+
+### 宝塔部署
+使用宝塔面板可以部署python项目,只要在宝塔安装python版本,添加项目就可以直接运行
+
+### docker部署
+使用docker也可以很好地后台运行,后面会出相关教程
+
+## 一些问题
+在我们使用flask的时候会看见弹出一个提示,大概是叫我们使用WSGI服务器,
+大家可以自行上网找教程,经典地有uwsgi(只适用于linux).
+
+感谢你收看本章节内容,看到这里,你已经离成功更进一步啦,请移步下一章.
+传送门：[vue部署教程](./vue.md)
