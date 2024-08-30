@@ -85,7 +85,9 @@
             </el-select>
         </el-form-item>
         <el-form-item>
-            <el-button @click="on_submit" id="submit_button" :disabled="submit_button_disable">提交</el-button>
+            <el-button @click="on_submit" id="submit_button" :disabled="submit_button_disable" size="large">提交(submit)</el-button>
+            <el-button @click="on_clear_value" id="clear_button" size="large">清空(clear)</el-button>
+            <el-button @click="default_value" id="default_button" size="large">默认值(default)</el-button>
         </el-form-item>
     </el-form>
     
@@ -207,7 +209,7 @@ const cabins = [
         label: 'Unknown'
     }
 ];
-/*
+
 const sex =  ref();
 const age =  ref();
 const fare = ref(); 
@@ -216,8 +218,9 @@ const ticket_class = ref();
 const name_title = ref(); 
 const cabin = ref(); 
 const family_size = ref(); 
-*/
+const submit_button_disable = ref(false);
 
+/*
 const sex = ref(1);
 const age = ref(11);
 const fare = ref(7.5);
@@ -228,6 +231,7 @@ const cabin = ref("A");
 const family_size = ref(11);
 const submit_button_disable = ref(false);
 
+*/
 
 var {canvas, play} = useVideoPlayer();
 //console.log(canvas.value);
@@ -265,6 +269,38 @@ const on_submit = () => {
             }
         }
     }, 1000);
+}
+
+const on_clear_value = () => {
+    sex.value = undefined;
+    age.value = undefined;
+    fare.value = undefined;
+    embarked.value = undefined;
+    ticket_class.value = undefined;
+    name_title.value = undefined;
+    cabin.value = undefined;
+    family_size.value = undefined;
+
+}
+
+function all_not_undefind() {
+  // 检查每个 ref 的 value 是否存在且不为空
+  return [
+    sex, age, fare, embarked, ticket_class, name_title, cabin, family_size
+  ].every(r => r.value !== undefined && r.value !== null && r.value !== '');
+}
+
+function default_value() {
+    // 为每个 ref 的 value 赋默认值
+    sex.value = 1;
+    age.value = 11;
+    fare.value = 7.5;
+    embarked.value = 1;
+    ticket_class.value = 1;
+    name_title.value = "Officer";
+    cabin.value = "A";
+    family_size.value = 11;
+
 }
 
 </script>

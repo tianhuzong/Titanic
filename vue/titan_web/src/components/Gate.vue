@@ -21,7 +21,9 @@ const count = ref(0)
 <template>
     <el-container>
         <el-header id="header_id">
-            <h1>泰坦尼克号生存预测</h1>
+            <h1>泰坦尼克号乘客生存预测 - Survival prediction of Titanic passengers</h1>
+            <p>请输入真实数据然后点击按钮提交预测,结果将以动画呈现</p>
+            <p>Please enter real data and click the button to submit the forecast, and the result will be animated.</p>
         </el-header>
         <el-main>
             <div class="radius">
@@ -47,7 +49,7 @@ const count = ref(0)
     width: 60%;
     border: 1px solid #4C4D4F;
     border-radius: 4px;
-    margin-top: 30px;
+    margin-top: 200px;
     margin-left: calc((100% - 60%) / 2);
     margin-bottom: 10px;
     padding-top: 20px;

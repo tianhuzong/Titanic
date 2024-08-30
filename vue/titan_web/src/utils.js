@@ -32,6 +32,13 @@ export  function predict(
     cabin, // 船舱号 A-T and U
     familySize // 家庭人数 包含自己
 ){
+    var are_they_definded = [
+        sex, age, fare, embarked, ticketClass, name, cabin, familySize
+    ].every(r => r !== undefined && r !== null && r !== '');
+    if (!are_they_definded){
+        ElMessage({message : "请填写所有必填项", type: "error"});
+        return null;
+    }
     var data = {
         sex: sex,
         age: age,
@@ -46,7 +53,6 @@ export  function predict(
     var value = null;
     ElMessage("已发起请求,请等待");
     value =  fetchData(url, data);
-    console.log(value);
     if (value == null){
         ElMessage({message : "请求失败,请前往服务端查看", type: "error"});
         return null;
