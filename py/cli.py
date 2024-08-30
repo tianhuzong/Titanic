@@ -10,17 +10,28 @@ def cli():
     """The Titantic CLI"""
     pass
 
-input_arg_types = (int, float, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, 
-)
+input_arg_types = (int, int, float, int, int, str, str, int)
 
 @cli.command()
 @click.option('-f','--framework', prompt='Please enter the framework',type=click.Choice(['paddle', 'onnx']) ,help='The framework to use for prediction (paddle or onnx)',required=True)
 @click.option('-m','--model_path', prompt='Please enter the model path',help='The path to the model file',required=True)
-@click.argument('input_args',  type=input_arg_types, nargs=28)
+@click.argument('input_args',  type=input_arg_types, nargs=8)
 def predict(framework, model_path, input_args):
-    """Predict the survival of a passenger based on their input data"""
-    model = predict_module.load_model(model_path)
-    res = predict_module.predict(framework, model, input_args)
+    """
+    Predict the survival of a passenger based on their input data\n
+    The input args are:\n
+        sex : int, # 男1 女0\n
+        age : int, # 年龄\n
+        fare : float, # 票价\n
+        embarked : int, # 登船港口 C=1 Q=2 S=3\n
+        ticket_class : int, # 船票类别 1 2 3\n
+        name : str, # 身份 Master Miss Mr Mrs Officer Royalty\n
+        cabin : str, # 船舱号 A-T and U\n
+        family_size : int, # 家庭人数 包含自己\n
+    """
+    input_tensor = predict_module.build_tensor(*input_args)
+    model = predict_module.load_model(framework, model_path)
+    res = predict_module.predict(framework, model, input_tensor)
     click.echo("The passenger {} survive.".format("can" if res else "cannot"))
 
 @cli.command()

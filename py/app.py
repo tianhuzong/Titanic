@@ -5,6 +5,7 @@ from flask_cors import CORS
 from trainer import predict as predict_module
 from loguru import logger
 import time
+import click
 app = Flask(__name__)
 CORS(app) 
 global model
@@ -56,5 +57,16 @@ def run_app(framework, model_path, host="0.0.0.0", port=8000, debug=True):
 
     app.run(host=host, port=port, debug=debug)
 
+
+
+@click.command()
+@click.option('-f','--framework' ,type=click.Choice(['paddle', 'onnx']) ,help='The framework to use for prediction (paddle or onnx)', default="paddle")
+@click.option('-m','--model_path',help='The path to the model file, If it is a model of flying slurry frame, please enter the file name, for example, models/paddle_model/model_titan (if your model is model_titan.pamodel).', default="models/paddle_model/model_titan")
+@click.option('--host', default="0.0.0.0", help='The host to run the app on')
+@click.option('--port', default=8000, help='The port to run the app on')
+@click.option('--debug', default=False, help='Whether to run the app in debug mode', is_flag=True)
+def runapp(framework, model_path, host, port, debug):
+    run_app(framework, model_path, host, port, debug)
+
 if __name__ == "__main__":
-    run_app("paddle", "models/paddle_model/model_titan", "0.0.0.0", 8000, True)
+    runapp()
