@@ -114,4 +114,4 @@ sudo systemctl start titanic_flask_app.service # 你保存时的文件名
 大家可以自行上网找教程,经典地有uwsgi(只适用于linux).
 
 感谢你收看本章节内容,看到这里,你已经离成功更进一步啦,请移步下一章.
-传送门：[vue部署教程](./vue.md)
+传送门：[前端代码教程](./vue.md)

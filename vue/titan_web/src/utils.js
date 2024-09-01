@@ -21,7 +21,7 @@ function fetchData(url, input_data) {
     return fetchDatares;
 }
 
-  
+
 export  function predict(
     sex, // 男1 女0
     age, // 年龄
@@ -59,4 +59,3 @@ export  function predict(
     }
     return value;
 }
-  
