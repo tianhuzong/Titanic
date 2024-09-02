@@ -13,8 +13,8 @@ def cli():
 input_arg_types = (int, int, float, int, int, str, str, int)
 
 @cli.command()
-@click.option('-f','--framework', prompt='Please enter the framework',type=click.Choice(['paddle', 'onnx']) ,help='The framework to use for prediction (paddle or onnx)',required=True)
-@click.option('-m','--model_path', prompt='Please enter the model path',help='The path to the model file',required=True)
+@click.option('-f','--framework', default='onnx', prompt='Please enter the framework',type=click.Choice(['paddle', 'onnx']) ,help='The framework to use for prediction (paddle or onnx)',required=True)
+@click.option('-m','--model_path', default='models/onnx_model/titan.onnx', prompt='Please enter the model path',help='The path to the model file',required=True)
 @click.argument('input_args',  type=input_arg_types, nargs=8)
 def predict(framework, model_path, input_args):
     """

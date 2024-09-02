@@ -27,11 +27,11 @@ Options:
 可以发现还是指定这些参数.
 不过！我这一次这些参数都没有设置必须填写,也就是说`python app.py`也可以正常运行
 **默认值** :
-- -f paddle
-- -m models/paddle_model/model_titan
+- -f onnx
+- -m models/onnx_model/titan.onnx
 - --host 0.0.0.0
 - --port 8000
-所以运行`python app.py`等价于`python app.py -f paddle -m models/paddle_model/model_titan --host 0.0.0.0 --port 8000`
+所以运行`python app.py`等价于`python app.py -f onnx -m models/onnx_model/titan.onnx --host 0.0.0.0 --port 8000`
 
 ## 后台运行
 我们的终端不可能一直挂着,所以我们就需要后台运行.
