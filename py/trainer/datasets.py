@@ -45,7 +45,6 @@ class ValData(Dataset):
         return len(self.data)
     
 
-import paddle
 
 def getdatasets(full):
     """用于获得train 和 val数据集"""

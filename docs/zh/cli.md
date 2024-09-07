@@ -85,6 +85,9 @@ The passenger cannot survive.
 
 **The passenger can survive.** 表示存活,而 **The passenger cannot survive.** 表示死亡.
 
+**注意: 由于不同的机器存在指令集的差异, 使用paddle推理时可能会输出`非法指令(核心已转储)`之类的提示**
+**为了保证正常推理, 建议使用onnx推理**
+
 ## `runapp`命令
 这个命令用于运行flask程序
 

@@ -13,7 +13,7 @@ global frame
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return """<h1>Hello, Welcome to Titanic Survival Prediction API, Please use POST method to predict the survival probability of a passenger.</h1>"""
 
 @app.post("/predict")
 def read_predict():
@@ -60,8 +60,8 @@ def run_app(framework, model_path, host="0.0.0.0", port=8000, debug=True):
 
 
 @click.command()
-@click.option('-f','--framework' ,type=click.Choice(['paddle', 'onnx']) ,help='The framework to use for prediction (paddle or onnx)', default="paddle")
-@click.option('-m','--model_path',help='The path to the model file, If it is a model of flying slurry frame, please enter the file name, for example, models/paddle_model/model_titan (if your model is model_titan.pamodel).', default="models/paddle_model/model_titan")
+@click.option('-f','--framework' ,type=click.Choice(['paddle', 'onnx']) ,help='The framework to use for prediction (paddle or onnx)', default="onnx")
+@click.option('-m','--model_path',help='The path to the model file, If it is a model of flying slurry frame, please enter the file name, for example, models/paddle_model/model_titan (if your model is model_titan.pamodel).', default="models/onnx_model/titan.onnx")
 @click.option('--host', default="0.0.0.0", help='The host to run the app on')
 @click.option('--port', default=8000, help='The port to run the app on')
 @click.option('--debug', default=False, help='Whether to run the app in debug mode', is_flag=True)
