@@ -48,7 +48,7 @@ def load_model(framework, model_path):
     if framework == "onnx":
         from . import predict_onnx as pre 
     elif framework == "paddle":
-        from .import predict_paddle as pre
+        from . import predict_paddle as pre
     return pre.load_model(model_path)   
 
 def predict(framework, model, target):
@@ -62,6 +62,6 @@ def predict(framework, model, target):
     if framework == "onnx":
         from . import predict_onnx as pre 
     elif framework == "paddle":
-        from .import predict_paddle as pre
+        from . import predict_paddle as pre
     output = pre.predict(model,target)
     return bool(output)
