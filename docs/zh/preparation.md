@@ -36,6 +36,12 @@ yarn install
 # 这样之后就可以运行了
 # yarm dev
 ```
+### 修改后端地址
+在目录`vue/titan_web/src/util.js`中有一行代码:
+```js
+const url = "http://localhost:8000/predict"; // TODO: Please modify it to the server address to connect with the predict interface.(请修改为服务端地址对接predict接口)
+```
+请将这行代码中的url换成你部署的后端的`公网地址`,除非你的后端部署在本地，否则就不能使用localhost!!!
 
 如果运行到这里没问题的话,那么恭喜你,已经成功地安装完依赖了.
 请前往下一章[命令行工具使用教程](./cli.md)

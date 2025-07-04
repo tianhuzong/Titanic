@@ -49,7 +49,7 @@ export  function predict(
         cabin: cabin,
         family_size: familySize
     };
-    const url = "https://ojvfxv-nkecab-8000.preview.cloudstudio.work/predict";
+    const url = "http://localhost:8000/predict"; // TODO: Please modify it to the server address to connect with the predict interface.(请修改为服务端地址对接predict接口)
     var value = null;
     ElMessage("已发起请求,请等待");
     value =  fetchData(url, data);

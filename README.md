@@ -13,7 +13,7 @@ gitee: [gitee](https://gitee.com/thzsen)
 
 ## 项目
 
-预测如果你在在泰坦尼克号上能否存活？模型训练代码采用paddle框架编写，并编写了一个vue的前端界面。
+预测如果你在在泰坦尼克号上能否存活。模型训练代码采用paddle框架编写，并编写了一个vue的前端界面。
 
 ## 许可证
 MIT许可证 [License](LICENSE)
@@ -53,6 +53,7 @@ Titanic/
             |--- public/ //存放着一些视频文件之类的
    |--- //以下放置开源协议和自述文件
 ```
+
 
 ## 文档
 [查看文档](docs/)
@@ -115,6 +116,8 @@ Titanic/
             |--- public/ //There are some video files and so on.
    |--- //Readme and License
 ```
+
+
 
 ## document
 [document](docs/)
