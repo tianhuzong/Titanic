@@ -54,6 +54,8 @@ Titanic/
    |--- //以下放置开源协议和自述文件
 ```
 
+## 部署
+请参考文档[docs/zh/preparation.md](docs/zh/preparation.md)
 
 ## 文档
 [查看文档](docs/)
@@ -117,7 +119,8 @@ Titanic/
    |--- //Readme and License
 ```
 
-
+## develop
+Please refer to Document [docs/zh/preparation.md](docs/zh/preparation.md)
 
 ## document
 [document](docs/)
